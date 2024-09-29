@@ -29,6 +29,7 @@ const submit = (e: Event) => {
         if (error) {
           error_message.value = error.message
         } else {
+          error_message.value = ''
           alert('Sign up completed. Check your email box.')
         }
       })
