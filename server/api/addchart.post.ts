@@ -18,7 +18,11 @@ export default defineEventHandler(async (event) => {
     level: Number(body.level)
   }
 
-  await client.from('charts').upsert(chart as any)
+  const result = await client.from('charts').upsert(chart as any)
+
+  if (result.error) {
+    throw createError({ statusCode: 500, message: result.error.message })
+  }
 
   return 'The chart has been added.'
 })

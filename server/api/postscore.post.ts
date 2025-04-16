@@ -1,5 +1,5 @@
 import { serverSupabaseServiceRole } from '#supabase/server'
-import { Chart } from '~/types/types'
+import { Chart, Chartstat } from '~/types/types'
 
 function grade(score: number, max: number) {
   const percent = score / max
@@ -78,7 +78,7 @@ export default defineEventHandler(async (event) => {
   type Body = {
     apikey: string
     songid: string
-    diff: string
+    diff: 'SPB' | 'SPN' | 'SPH' | 'SPA' | 'SPL' | 'DPB' | 'DPN' | 'DPH' | 'DPA' | 'DPL'
     exscore: string
     misscount: string
     lamp: string
@@ -90,8 +90,10 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, message: 'Unauthorized' })
   }
 
-  const { data: user_id } = await client.from('apikeys').select('id').eq('apikey', body.apikey).single()
-  if (!user_id) {
+  const { data: user } = (await client.from('apikeys').select('id').eq('apikey', body.apikey).single()) as {
+    data: { id: string }
+  }
+  if (!user) {
     throw createError({ statusCode: 401, message: 'Unauthorized' })
   }
 
@@ -105,9 +107,9 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 404, message: 'Chart Not Found' })
   }
 
-  await client.from('chartstats').upsert({
-    user_id: user_id,
-    song_id: body.songid,
+  const chartstat: Chartstat = {
+    user_id: user.id,
+    song_id: Number(body.songid),
     difficulty: body.diff,
     grade: grade(Number(body.exscore), chart.note_count * 2),
     gradediff: gradediff(Number(body.exscore), chart.note_count * 2),
@@ -115,7 +117,13 @@ export default defineEventHandler(async (event) => {
     miss: Math.min(Number(body.misscount), 9999),
     ex_score: Number(body.exscore),
     percent_max: Number(body.exscore) / (chart.note_count * 2)
-  } as any)
+  }
+
+  const result = await client.from('chartstats').upsert(chartstat as any)
+
+  if (result.error) {
+    throw createError({ statusCode: 500, message: result.error.message })
+  }
 
   return 'The score has been posted.'
 })

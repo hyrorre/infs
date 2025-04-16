@@ -24,7 +24,11 @@ export default defineEventHandler(async (event) => {
     unlock_type: body.unlockType
   }
 
-  await client.from('songs').upsert(song as any)
+  const result = await client.from('songs').upsert(song as any)
+
+  if (result.error) {
+    throw createError({ statusCode: 500, message: result.error.message })
+  }
 
   return 'The song has been added.'
 })
