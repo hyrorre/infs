@@ -4,7 +4,7 @@ import { Chart } from '~/types/types'
 export default defineEventHandler(async (event) => {
   type Body = {
     songid: string
-    diff: string
+    diff: 'SPB' | 'SPN' | 'SPH' | 'SPA' | 'SPL' | 'DPB' | 'DPN' | 'DPH' | 'DPA' | 'DPL'
     notecount: string
     level: string
   }

@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { FullChartstat } from '~/types/types'
+
 const loading = ref(true)
-const chartstats = ref<any[]>([])
+const chartstats = ref<FullChartstat[]>([])
 
 const filter = ref<any>({
   style: 'SP',
