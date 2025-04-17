@@ -9,7 +9,7 @@ export type Profile = {
 export default function () {
   const profile = ref<Profile | null>(null)
   const supabase = useSupabaseClient()
-  
+
   supabase.auth.onAuthStateChange((event, session) => {
     if (session) {
       supabase
