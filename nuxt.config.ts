@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   css: ['~/app.css'],
+  imports: {
+    dirs: ['types/**'],
+  },
   modules: ['@nuxt/eslint', '@nuxtjs/supabase', '@nuxt/ui'],
   supabase: {
     redirectOptions: {

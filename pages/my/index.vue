@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui'
-import type { Filter, FullChartstat } from '~/types'
 
 const columns: TableColumn<FullChartstat>[] = [
   {
