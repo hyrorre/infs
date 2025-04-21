@@ -1,5 +1,5 @@
 import { serverSupabaseServiceRole } from '#supabase/server'
-import { Chart, Chartstat } from '~/types/types'
+import { Chart, Chartstat } from '~/types'
 
 function grade(score: number, max: number) {
   const percent = score / max

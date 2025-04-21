@@ -1,5 +1,5 @@
 import { serverSupabaseServiceRole } from '#supabase/server'
-import { Song } from '~/types/types'
+import { Song } from '~/types'
 
 export default defineEventHandler(async (event) => {
   type Body = {

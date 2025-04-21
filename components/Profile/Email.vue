@@ -5,20 +5,11 @@ const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
 const saved = ref(false)
-const error_message = ref('')
+const message = ref('')
 
-const form = reactive({
-  email: ''
-})
-
-const submit = async (e: FormSubmitEvent<typeof form>) => {
-  supabase.auth.updateUser(form).then(({ data, error }) => {
-    if (error) {
-      error_message.value = error.message
-    } else {
-      error_message.value = ''
-      saved.value = true
-    }
+const submit = async () => {
+  supabase.auth.updateUser({ email: user.value?.email }).then(({ data, error }) => {
+    message.value = error ? error.message : 'Check your email box.'
   })
 }
 </script>
@@ -27,15 +18,16 @@ const submit = async (e: FormSubmitEvent<typeof form>) => {
   <u-card>
     <template #header>
       <h3>Email</h3>
-      <p>Update your account's email address.</p>
     </template>
     <div v-if="!user?.email">loading...</div>
-    <u-form v-else :state="form" @submit="submit">
+    <u-form v-else :state="user" @submit="submit">
       <u-form-field label="Email" name="email">
-        <u-input v-model="form.email" required autofocus class="w-full" size="lg" />
+        <u-input v-model="user.email" required autofocus class="w-full" size="lg" />
       </u-form-field>
-      <p>{{ error_message }}</p>
-      <u-button>Save</u-button>
+      <div class="mt-4 flex justify-end items-center">
+        <div class="mr-4">{{ message }}</div>
+        <u-button type="submit">Save</u-button>
+      </div>
     </u-form>
   </u-card>
 </template>

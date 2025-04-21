@@ -12,4 +12,5 @@ const supabase = useSupabaseClient()
       <u-link to="/signup" class="m-4">SIGN UP</u-link>
     </div>
   </u-container>
+  <Footer />
 </template>

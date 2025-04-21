@@ -1,5 +1,5 @@
 import { serverSupabaseServiceRole } from '#supabase/server'
-import { Chart } from '~/types/types'
+import { Chart } from '~/types'
 
 export default defineEventHandler(async (event) => {
   type Body = {

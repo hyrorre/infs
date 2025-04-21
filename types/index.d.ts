@@ -1,3 +1,11 @@
+export type Profile = {
+  id: string
+  name: string
+  iidx_id: string
+  infinitas_id: string
+  scope: 'private' | 'public' | 'rival'
+}
+
 export type Song = {
   id: number
   title: string
@@ -29,16 +37,13 @@ export type Chartstat = {
 
 export type FullChartstat = {
   song_id: number
-  title: string
-  title2: string
-  genre: string
-  artist: string
-  bpm: string
-  unlock_type: string
-  note_count: number
-  level: number
-  user_id: string
-  song_id: number
+  songs: {
+    title: string
+  }
+  charts: {
+    note_count: number
+    level: number
+  }
   difficulty: 'SPB' | 'SPN' | 'SPH' | 'SPA' | 'SPL' | 'DPB' | 'DPN' | 'DPH' | 'DPA' | 'DPL'
   grade: string
   gradediff: string
@@ -46,4 +51,12 @@ export type FullChartstat = {
   miss: number
   ex_score: number
   percent_max: number
+}
+
+export type Filter = {
+  style: string
+  difficulty: string | null
+  level: number | null
+  lamp: string | null
+  grade: string | null
 }

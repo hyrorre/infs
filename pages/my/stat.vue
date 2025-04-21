@@ -63,4 +63,5 @@ const options = {
     <p>{{ data }}</p>
     <GChart type="BarChart" :data="data" :options="options" />
   </u-container>
+  <Footer />
 </template>

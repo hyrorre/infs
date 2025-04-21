@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui'
-import type { FullChartstat } from '~/types/types'
+import type { Filter, FullChartstat } from '~/types'
 
 const columns: TableColumn<FullChartstat>[] = [
   {
-    accessorKey: 'title',
+    accessorKey: 'songs.title',
     header: 'TITLE',
     cell: ({ row }) =>
-      (row.getValue('title') as string).replace(
+      row.original.songs.title.replace(
         / *(-[^-]+-|\(.+\)|~.+~|～.+～|feat\..+|ft\..+|With Money.*|そしてお米を.*|-JAKA.*)$/,
         '\n$1'
       )
@@ -17,7 +17,7 @@ const columns: TableColumn<FullChartstat>[] = [
     header: 'DIFF'
   },
   {
-    accessorKey: 'level',
+    accessorKey: 'charts.level',
     header: 'LEVEL'
   },
   {
@@ -39,7 +39,7 @@ const columns: TableColumn<FullChartstat>[] = [
   }
 ]
 
-const filter = ref<any>({
+const filter = ref<Filter>({
   style: 'SP',
   difficulty: null,
   level: null,
@@ -52,39 +52,35 @@ const reverse = ref(false)
 const isPrivate = ref(false)
 
 const force = ref(false)
-const {
-  data: chartstats,
-  status,
-  refresh,
-  error
-} = useFetch<FullChartstat[]>('https://infs.iidx.wiki/api/getscore/hyrorre', {
-  method: 'GET',
-  cache: force.value ? 'no-cache' : 'force-cache'
-})
 
-const filterFn = (chartstat: any) => {
+const pending = ref(true)
+
+const { data: chartstats, error, status, refresh } = useFetch('/api/my/chartstat')
+
+const filterFn = (chartstat: FullChartstat) => {
   return (
-    chartstat.playtype === filter.value.style &&
+    chartstat.difficulty.startsWith(filter.value.style) &&
     (filter.value.difficulty === null || chartstat.difficulty === filter.value.style + filter.value.difficulty) &&
-    (filter.value.level === null || chartstat.level === filter.value.level) &&
+    (filter.value.level === null || chartstat.charts.level === filter.value.level) &&
     (filter.value.lamp === null || chartstat.lamp === filter.value.lamp) &&
     (filter.value.grade === null || chartstat.grade === filter.value.grade)
   )
 }
 
-const sortFn = (a: any, b: any) => {
+const sortFn = (a: FullChartstat, b: FullChartstat) => {
   if (sort.value === 'TITLE') {
-    if (a.title < b.title) {
+    if (a.songs.title < b.songs.title) {
       return reverse.value ? 1 : -1
-    } else if (a.title > b.title) {
+    } else if (a.songs.title > b.songs.title) {
       return reverse.value ? -1 : 1
     } else {
       return 0
     }
   } else if (sort.value === 'DIFFICULTY') {
-    return b.difficulty - a.difficulty
+    const difficulties = ['SPB', 'SPN', 'SPH', 'SPA', 'SPL', 'DPB', 'DPN', 'DPH', 'DPA', 'DPL']
+    return (reverse.value ? -1 : 1) * (difficulties.indexOf(b.difficulty) - difficulties.indexOf(a.difficulty))
   } else if (sort.value === 'LEVEL') {
-    return reverse.value ? b.level - a.level : a.level - b.level
+    return reverse.value ? b.charts.level - a.charts.level : a.charts.level - b.charts.level
   } else if (sort.value === 'LAMP') {
     const lamps = ['NP', 'AC', 'EC', 'NC', 'HC', 'EX', 'FC']
     return reverse.value ? lamps.indexOf(b.lamp) - lamps.indexOf(a.lamp) : lamps.indexOf(a.lamp) - lamps.indexOf(b.lamp)
@@ -171,8 +167,10 @@ const sortFn = (a: any, b: any) => {
     <section>
       <p v-if="isPrivate">{{ 'Rival' }}'s Score is private.</p>
       <p v-else-if="status === 'pending'">Loading score data...</p>
+      <p v-else-if="error">{{ error.message }}</p>
       <p v-else-if="!chartstats?.length">Score is not uploaded.</p>
       <u-table v-else :data="chartstats.filter(filterFn).sort(sortFn)" :columns="columns" class="score-table" />
     </section>
   </u-container>
+  <Footer />
 </template>
