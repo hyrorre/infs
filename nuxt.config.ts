@@ -4,14 +4,14 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/app.css'],
   imports: {
-    dirs: ['types/**'],
+    dirs: ['types/**']
   },
   modules: ['@nuxt/eslint', '@nuxtjs/supabase', '@nuxt/ui'],
   supabase: {
     redirectOptions: {
       login: '/signin',
       callback: '/',
-      include: ['/my/**']
+      include: ['/my', '/my/**']
     }
   }
 })
