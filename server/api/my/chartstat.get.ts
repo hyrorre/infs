@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
       'song_id, difficulty, grade, gradediff, lamp, miss, ex_score, percent_max, charts(note_count, level), songs(title)'
     )
     .eq('user_id', user.id)
-    .setHeader('Cache-Control', 'private, max-age: 86400000') // 1000 days
+  // .setHeader('Cache-Control', 'private, max-age: 86400000') // 1000 days
 
   return data
 })

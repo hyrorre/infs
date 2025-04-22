@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { GChart } from 'vue-google-charts'
 
-const force = ref(false)
-const { data: chartstats, error, status, refresh } = useFetch<FullChartstat[]>('/api/my/chartstat')
+const id = useRoute().params.id
+const { data: chartstats, error, status, refresh } = useFetch<FullChartstat[]>(`/api/user/${id}/chartstat`)
 
 const data = computed(() =>
   [['TEST', 'AAA', 'AA', 'A', 'B', 'C', 'D', 'F']].concat(
@@ -54,7 +54,7 @@ const options = {
 <template>
   <Header :title="'My Score'" />
   <u-container>
-    <h1 class="text-2xl font-bold mb-4">MY SCORE DATA</h1>
+    <h1 class="text-2xl font-bold mb-4">{{ id }}'s SCORE DATA</h1>
     <p v-if="status === 'pending'">Loading score data...</p>
     <p v-else-if="error">{{ error.message }}</p>
     <p v-else-if="!chartstats?.length">Score is not uploaded.</p>

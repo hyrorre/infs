@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
-const profile = useSupabaseProfile()
-
 const signOut = () => {
   const supabase = useSupabaseClient()
   supabase.auth.signOut().then(() => useRouter().push('/'))
 }
+
+const id = useRoute().params.id
+const user = useSupabaseUser()
+const profile = useSupabaseProfile()
 
 const items = computed(
   () =>
@@ -15,37 +17,39 @@ const items = computed(
         {
           label: 'INF SCORE TOOL',
           icon: 'i-tabler-infinity',
-          to: '/my',
+          to: user.value ? '/my' : '/',
           active: false
         },
         {},
         {
           label: 'Score',
           icon: 'i-tabler-table',
-          to: '/my'
+          to: id ? `/user/${id}` : '/my'
         },
         {
           label: 'Statistics',
           icon: 'i-tabler-chart-bar',
-          to: '/my/stat'
+          to: id ? `/user/${id}/stat` : '/my/stat'
         }
       ],
-      [
-        {
-          label: profile.value?.name,
-          icon: 'i-tabler-user',
-          children: [
+      user.value
+        ? [
             {
-              label: 'Profile',
-              to: '/my/profile'
-            },
-            {
-              label: 'Sign Out',
-              to: '/signout'
+              label: profile.value?.name,
+              icon: 'i-tabler-user',
+              children: [
+                {
+                  label: 'Profile',
+                  to: '/my/profile'
+                },
+                {
+                  label: 'Sign Out',
+                  onSelect: () => signOut()
+                }
+              ]
             }
           ]
-        }
-      ]
+        : []
     ]
 )
 </script>
