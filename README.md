@@ -5,7 +5,9 @@
 ## TODO
 
 - [x] Add: view other's score
+- [x] Add: seo meta tags
 - [ ] Add: api key form
+- [ ] Add: mobile width support
 - [ ] Update: statistics page
 - [ ] Add: rival page
 - [ ] Add: support beginner charts
