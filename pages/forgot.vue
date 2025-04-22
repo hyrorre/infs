@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '@nuxt/ui'
 
+useHead({
+  title: 'FORGOT PASSWORD'
+})
+
 const supabase = useSupabaseClient()
 
 const form = reactive({

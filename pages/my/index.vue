@@ -1,4 +1,9 @@
 <script setup lang="ts">
+
+useHead({
+  title: 'MY SCORE DATA'
+})
+
 const filter = ref<Filter>({
   style: 'SP',
   difficulty: null,

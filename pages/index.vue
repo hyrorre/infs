@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '@nuxt/ui'
 
+useHead({
+  title: 'beatmania IIDX INFINITAS SCORE TOOL',
+  titleTemplate: '%s'
+})
+
 const supabase = useSupabaseClient()
 </script>
 

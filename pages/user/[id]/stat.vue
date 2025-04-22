@@ -2,6 +2,16 @@
 import { GChart } from 'vue-google-charts'
 
 const id = useRoute().params.id
+const title = `${id}'s SCORE STATISTICS`
+
+useHead({
+  title,
+  meta: [
+    { property: 'og:title', content: title },
+    { property: 'twitter:title', content: title }
+  ]
+})
+
 const { data: chartstats, error, status, refresh } = useFetch<FullChartstat[]>(`/api/user/${id}/chartstat`)
 
 const data = computed(() =>

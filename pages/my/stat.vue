@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { GChart } from 'vue-google-charts'
 
+useHead({
+  title: 'MY SCORE STATISTICS'
+})
+
 const force = ref(false)
 const { data: chartstats, error, status, refresh } = useFetch<FullChartstat[]>('/api/my/chartstat')
 

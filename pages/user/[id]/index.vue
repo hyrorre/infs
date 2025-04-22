@@ -1,4 +1,15 @@
 <script setup lang="ts">
+const id = useRoute().params.id
+const title = `${id}'s SCORE DATA`
+
+useHead({
+  title,
+  meta: [
+    { property: 'og:title', content: title },
+    { property: 'twitter:title', content: title }
+  ]
+})
+
 const filter = ref<Filter>({
   style: 'SP',
   difficulty: null,
@@ -9,8 +20,6 @@ const filter = ref<Filter>({
 
 const sort = ref('TITLE')
 const reverse = ref(false)
-
-const id = useRoute().params.id
 
 const { data: chartstats, error, status, refresh } = useFetch(`/api/user/${id}/chartstat`)
 </script>
