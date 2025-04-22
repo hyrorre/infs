@@ -81,12 +81,16 @@ const sortFn = (a: FullChartstat, b: FullChartstat) => {
 }
 
 const profile = useSupabaseProfile()
+
+const filteredChartstats = computed(() => {
+  return chartstats.filter(filterFn).sort(sortFn)
+})
 </script>
 
 <template>
   <section>
     <div class="flex justify-between items-center">
-      <div v-if="chartstats">Count : {{ chartstats.length }}</div>
+      <div v-if="chartstats">Count : {{ filteredChartstats.length }}</div>
       <div>
         <u-button
           v-if="$route.params.id || profile?.scope === 'public'"
@@ -102,6 +106,6 @@ const profile = useSupabaseProfile()
         <u-button variant="outline" color="neutral" icon="i-tabler-refresh" @click="$emit('refresh')">Reload</u-button>
       </div>
     </div>
-    <u-table :data="chartstats.filter(filterFn).sort(sortFn)" :columns="columns" class="score-table" />
+    <u-table :data="filteredChartstats" :columns="columns" class="score-table" />
   </section>
 </template>
