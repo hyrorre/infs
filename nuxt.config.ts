@@ -42,5 +42,15 @@ export default defineNuxtConfig({
       callback: '/',
       include: ['/my', '/my/**']
     }
+  },
+  nitro: {
+    preset: 'cloudflare_pages',
+    experimental: {
+      tasks: true
+    },
+    scheduledTasks: {
+      // 毎日 UTC 0時 (JST 9時)
+      '0 0 * * *': ['dummy']
+    }
   }
 })

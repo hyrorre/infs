@@ -6,6 +6,7 @@
 
 - [x] Add: view other's score
 - [x] Add: seo meta tags
+- [ ] Fix: cpu time exceed error
 - [ ] Add: api key form
 - [ ] Add: mobile width support
 - [ ] Update: statistics page
