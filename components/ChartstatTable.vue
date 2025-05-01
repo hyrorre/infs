@@ -85,6 +85,8 @@ const profile = useSupabaseProfile()
 const filteredChartstats = computed(() => {
   return chartstats.filter(filterFn).sort(sortFn)
 })
+
+const page = ref(1)
 </script>
 
 <template>
@@ -106,6 +108,11 @@ const filteredChartstats = computed(() => {
         <u-button variant="outline" color="neutral" icon="i-tabler-refresh" @click="$emit('refresh')">Reload</u-button>
       </div>
     </div>
-    <u-table :data="filteredChartstats" :columns="columns" class="score-table" />
+    <u-table :data="filteredChartstats.slice(filter.limit * (page - 1), filter.limit * page)" :columns="columns" />
+    <u-pagination
+      v-model:page="page"
+      :total="Math.ceil(filteredChartstats.length / filter.limit)"
+      :ui="{ list: 'justify-center mt-8' }"
+    />
   </section>
 </template>

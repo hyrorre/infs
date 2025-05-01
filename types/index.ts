@@ -59,4 +59,5 @@ export type Filter = {
   level: number | null
   lamp: string | null
   grade: string | null
+  limit: number
 }

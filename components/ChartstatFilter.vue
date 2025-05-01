@@ -68,5 +68,9 @@ const { filter, sort, reverse } = defineProps<{
         </u-button>
       </template>
     </div>
+    <div>
+      <span class="mr-2">LIMIT</span>
+      <u-select class="m-1" v-model="filter.limit" :items="[100, 200, 500, 1000, 2000, 5000, 99999]"></u-select>
+    </div>
   </section>
 </template>

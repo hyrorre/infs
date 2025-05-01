@@ -9,7 +9,8 @@ const filter = ref<Filter>({
   difficulty: null,
   level: null,
   lamp: null,
-  grade: null
+  grade: null,
+  limit: 100
 })
 
 const sort = ref('TITLE')
