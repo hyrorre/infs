@@ -96,7 +96,7 @@ const page = ref(1)
       <div>
         <u-button
           v-if="$route.params.id || profile?.scope === 'public'"
-          :href="`https://x.com/intent/tweet?text=${encodeURI(useRequestURL().hostname + '/user/' + ($route.params.id || profile?.id))}`"
+          :href="`https://x.com/intent/tweet?text=${encodeURI(useRequestURL().hostname + '/user/' + ($route.params.id || profile?.name))}`"
           target="_blank"
           variant="outline"
           color="neutral"
