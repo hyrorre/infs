@@ -12,6 +12,7 @@ useHead({
   ]
 })
 
+const { filter, sort, reverse } = useChartstatFilter()
 const { data: chartstats, error, status, refresh } = useFetch<FullChartstat[]>(`/api/user/${id}/chartstat`)
 
 const data = computed(() =>

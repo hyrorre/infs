@@ -10,17 +10,7 @@ useHead({
   ]
 })
 
-const filter = ref<Filter>({
-  style: 'SP',
-  difficulty: null,
-  level: null,
-  lamp: null,
-  grade: null
-})
-
-const sort = ref('TITLE')
-const reverse = ref(false)
-
+const { filter, sort, reverse } = useChartstatFilter()
 const { data: chartstats, error, status, refresh } = useFetch(`/api/user/${id}/chartstat`)
 </script>
 

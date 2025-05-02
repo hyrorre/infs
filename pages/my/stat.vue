@@ -5,7 +5,7 @@ useHead({
   title: 'MY SCORE STATISTICS'
 })
 
-const force = ref(false)
+const { filter, sort, reverse } = useChartstatFilter()
 const { data: chartstats, error, status, refresh } = useFetch<FullChartstat[]>('/api/my/chartstat')
 
 const data = computed(() =>

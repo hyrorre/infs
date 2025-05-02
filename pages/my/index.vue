@@ -1,21 +1,9 @@
 <script setup lang="ts">
-
 useHead({
   title: 'MY SCORE DATA'
 })
 
-const filter = ref<Filter>({
-  style: 'SP',
-  difficulty: null,
-  level: null,
-  lamp: null,
-  grade: null,
-  limit: 100
-})
-
-const sort = ref('TITLE')
-const reverse = ref(false)
-
+const { filter, sort, reverse } = useChartstatFilter()
 const { data: chartstats, error, status, refresh } = useFetch('/api/my/chartstat')
 </script>
 
