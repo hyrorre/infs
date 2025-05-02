@@ -111,7 +111,8 @@ const page = ref(1)
     <u-table :data="filteredChartstats.slice(filter.limit * (page - 1), filter.limit * page)" :columns="columns" />
     <u-pagination
       v-model:page="page"
-      :total="Math.ceil(filteredChartstats.length / filter.limit)"
+      :total="filteredChartstats.length"
+      :items-per-page="filter.limit"
       :ui="{ list: 'justify-center mt-8' }"
     />
   </section>
