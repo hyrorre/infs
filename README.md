@@ -11,7 +11,6 @@
 - [ ] Add: mobile width support
 - [ ] Update: statistics page
 - [ ] Add: rival page
-- [ ] Add: support beginner charts
 
 ## Setup
 
@@ -30,7 +29,7 @@ beatmania IIDX INFINITAS用のスコアツールです。
 INFINITASの情報取得ツール Reflux を利用してスコアを登録できます。
 
 1. 会員登録<br>
-   メールアドレスとパスワードを入力<br>
+   メールアドレスとパスワードを入力します。<br>
    入力したメールアドレスにメールが送られるので、記載されているリンクをクリックしてください。<br>
    <br>
 2. ログイン<br>
@@ -41,8 +40,17 @@ INFINITASの情報取得ツール Reflux を利用してスコアを登録でき
    プロフィール登録は必須ではありませんが、スコアを公開する場合は必要です。<br>
    <br>
 4. Refluxの設定<br>
-   saveremoteをtrueにし、serverを"https://infs.iidx.wiki"にしてください。<br>
-   2で登録したAPIキーを入力してください。<br>
-   <br>
+   config.iniを開き、saveremote, server, apikeyを編集します。<br>
+   apikeyには3で登録したAPIキーを入力してください。<br>
+```ini
+[Record]
+saveremote = true
+
+[RemoteRecord]
+serverAddress = "https://infs.iidx.wiki"
+apikey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
 5. INFINITASとRefluxの起動<br>
-   <br>
+   INFINITASとRefluxを起動します。<br>
+   初回のスコア送信には時間がかかります。<br>
+   2回目以降は前回からの差分のみ送信されます。<br>
