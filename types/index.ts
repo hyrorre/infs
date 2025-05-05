@@ -6,6 +6,11 @@ export type Profile = {
   scope: 'private' | 'public' | 'rival'
 }
 
+export type ApiKey = {
+  id: string
+  apikey: string
+}
+
 export type Song = {
   id: number
   title: string

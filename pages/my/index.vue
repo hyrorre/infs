@@ -3,6 +3,15 @@ useHead({
   title: 'MY SCORE DATA'
 })
 
+definePageMeta({
+  middleware: () => {
+    const profile = useSupabaseProfile()
+    if (!profile.value) {
+      return navigateTo('/my/profile')
+    }
+  }
+})
+
 const { filter, sort, reverse } = useChartstatFilter()
 const { data: chartstats, error, status, refresh } = useFetch('/api/my/chartstat')
 </script>

@@ -1,8 +1,26 @@
 <script setup lang="ts">
-import type { FormSubmitEvent } from '@nuxt/ui'
-
 const supabase = useSupabaseClient()
-const form = useSupabaseProfile()
+const user = useSupabaseUser()
+
+const {
+  data: form,
+  error,
+  status
+} = useAsyncData<Profile>(async () => {
+  const { data, error } = await supabase.from('profiles').select('*').eq('id', user.value!.id).single<Profile>()
+  if (error) {
+    const { data, error: error2 } = await supabase
+      .from('profiles')
+      .insert({ id: user.value?.id } as any)
+      .select()
+      .single<Profile>()
+    if (error2) {
+      throw error
+    }
+    return data as any
+  }
+  return data as any
+})
 
 const message = ref('')
 
@@ -21,8 +39,9 @@ const submit = () => {
     <template #header>
       <h3>Profile</h3>
     </template>
-    <div v-if="!form">loading...</div>
-    <u-form v-else :state="form" @submit="submit">
+    <div v-if="status === 'pending'">loading...</div>
+    <div v-else-if="error">{{ error.message }}</div>
+    <u-form v-else-if="form" :state="form" @submit="submit">
       <u-form-field label="ID" name="name">
         <u-input v-model="form.name" required class="w-full" size="lg" />
       </u-form-field>

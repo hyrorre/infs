@@ -7,7 +7,8 @@
 - [x] Add: view other's score
 - [x] Add: seo meta tags
 - [x] Fix: cpu time exceed error
-- [ ] Add: api key form
+- [x] Add: api key form
+- [ ] Add: how to use page
 - [ ] Add: mobile width support
 - [ ] Update: statistics page
 - [ ] Add: rival page
@@ -42,6 +43,7 @@ INFINITASの情報取得ツール Reflux を利用してスコアを登録でき
 4. Refluxの設定<br>
    config.iniを開き、saveremote, server, apikeyを編集します。<br>
    apikeyには3で登録したAPIキーを入力してください。<br>
+
 ```ini
 [Record]
 saveremote = true
@@ -50,6 +52,7 @@ saveremote = true
 serverAddress = "https://infs.iidx.wiki"
 apikey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
+
 5. INFINITASとRefluxの起動<br>
    INFINITASとRefluxを起動します。<br>
    初回のスコア送信には時間がかかります。<br>

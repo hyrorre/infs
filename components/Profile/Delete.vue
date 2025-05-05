@@ -39,12 +39,12 @@ const submit = () => {
         <u-form :state="form" @submit="submit">
           Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will
           be permanently deleted. Please enter "Delete" to confirm you would like to permanently delete your account.
-          <u-form-field name="del">
+          <u-form-field name="del" class="mt-4">
             <u-input v-model="form.del" required class="w-full" size="lg" />
           </u-form-field>
           <div class="mt-4 flex justify-end items-center">
             <div class="mr-4">{{ message }}</div>
-            <u-button type="submit">DELETE ACCOUNT</u-button>
+            <u-button color="error" type="submit">DELETE ACCOUNT</u-button>
           </div>
         </u-form>
       </template>
