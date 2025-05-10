@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['types/**']
   },
-  modules: ['@nuxt/eslint', '@nuxtjs/supabase', '@nuxt/ui'],
+  modules: ['@nuxt/content', '@nuxt/eslint', '@nuxtjs/supabase', '@nuxt/ui'],
   app: {
     head: {
       title: 'INF SCORE TOOL',
@@ -35,6 +35,9 @@ export default defineNuxtConfig({
         { name: 'twitter:description', content: 'beatmania IIDX INFINITAS SCORE TOOL' }
       ]
     }
+  },
+  nitro: {
+    preset: 'cloudflare_pages'
   },
   supabase: {
     redirectOptions: {

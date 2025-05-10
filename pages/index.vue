@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { FormSubmitEvent } from '@nuxt/ui'
-
 useHead({
   title: 'beatmania IIDX INFINITAS SCORE TOOL',
   titleTemplate: '%s'
 })
 
-const supabase = useSupabaseClient()
+const user = useSupabaseUser()
+
+const route = useRoute()
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection('content').path(route.path).first()
+})
 </script>
 
 <template>
-  <u-container class="text-center h-full flex flex-col justify-center">
-    <h1 class="text-4xl">beatmania IIDX INFINITAS SCORE TOOL</h1>
-    <div class="mt-8">
-      <u-link to="/signin" class="m-4">SIGN IN</u-link>
-      <u-link to="/signup" class="m-4">SIGN UP</u-link>
-    </div>
+  <Header />
+  <u-container class="text-center">
+    <ContentRenderer v-if="page" :value="page" class="content" />
   </u-container>
   <Footer />
 </template>

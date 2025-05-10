@@ -17,24 +17,31 @@ const items = computed(
         {
           label: 'INF SCORE TOOL',
           icon: 'i-tabler-infinity',
-          to: user.value ? '/my' : '/',
-          active: false
-        },
-        {},
-        {
-          label: 'Score',
-          icon: 'i-tabler-table',
-          to: id ? `/user/${id}` : '/my'
-        },
-        {
-          label: 'Statistics',
-          icon: 'i-tabler-chart-bar',
-          to: id ? `/user/${id}/stat` : '/my/stat'
+          to: '/',
+          active: false,
+          class: 'site-title'
         }
-      ],
+      ].concat(
+        user.value || id
+          ? [
+              {},
+              {
+                label: 'Score',
+                icon: 'i-tabler-table',
+                to: id ? `/user/${id}` : '/my'
+              },
+              {
+                label: 'Stat',
+                icon: 'i-tabler-chart-bar',
+                to: id ? `/user/${id}/stat` : '/my/stat'
+              }
+            ]
+          : ([] as any)
+      ),
       user.value
         ? [
             {
+              class: 'profile',
               label: profile.value?.name,
               icon: 'i-tabler-user',
               children: [
@@ -49,7 +56,18 @@ const items = computed(
               ]
             }
           ]
-        : []
+        : [
+            {
+              label: 'Sign In',
+              icon: 'i-tabler-login',
+              to: '/signin'
+            },
+            {
+              label: 'Sign Up',
+              icon: 'i-tabler-user-plus',
+              to: '/signup'
+            }
+          ]
     ]
 )
 </script>
@@ -59,3 +77,21 @@ const items = computed(
     <u-navigation-menu :items="items" content-orientation="vertical" />
   </header>
 </template>
+
+<style lang="scss">
+@media screen and (max-width: 640px) {
+  header {
+    .site-title {
+      .truncate {
+        display: none;
+      }
+    }
+
+    .profile {
+      .truncate {
+        display: none;
+      }
+    }
+  }
+}
+</style>
