@@ -4,8 +4,8 @@ useHead({
 })
 
 definePageMeta({
-  middleware: () => {
-    const profile = useSupabaseProfile()
+  middleware: async () => {
+    const { data: profile } = await useFetch('/api/my/profile')
     if (!profile.value) {
       return navigateTo('/my/profile')
     }
