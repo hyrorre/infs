@@ -36,9 +36,6 @@ export default defineNuxtConfig({
       ]
     }
   },
-  nitro: {
-    preset: 'cloudflare_pages'
-  },
   supabase: {
     redirectOptions: {
       login: '/signin',
