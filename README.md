@@ -8,7 +8,7 @@
 - [x] Add: seo meta tags
 - [x] Fix: cpu time exceed error
 - [x] Add: api key form
-- [ ] Add: how to use page
+- [x] Add: how to use page
 - [ ] Add: mobile width support
 - [ ] Update: statistics page
 - [ ] Add: rival page
@@ -40,7 +40,8 @@ INFINITASの情報取得ツール Reflux を利用してスコアを登録でき
    初回ログイン後はプロフィール登録画面が表示されます。<br>
    プロフィール登録は必須ではありませんが、スコアを公開する場合は必要です。<br>
    <br>
-4. Refluxの設定<br>
+4. Refluxのダウンロードと設定<br>
+   ダウンロード - https://github.com/olji/Reflux/releases<br>
    config.iniを開き、saveremote, server, apikeyを編集します。<br>
    apikeyには3で登録したAPIキーを入力してください。<br>
 
