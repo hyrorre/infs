@@ -78,7 +78,7 @@ const items = computed(
   </header>
 </template>
 
-<style lang="scss">
+<style>
 @media screen and (max-width: 640px) {
   header {
     .site-title {
