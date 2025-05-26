@@ -55,7 +55,8 @@ export default defineNuxtConfig({
           logs: {
             enabled: true
           }
-        }
+        },
+        keep_vars: true
       }
     }
   }
