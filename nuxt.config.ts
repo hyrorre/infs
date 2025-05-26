@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+  compatibilityDate: '2024-09-19',
   devtools: { enabled: true },
   css: ['~/app.css'],
   imports: {
@@ -41,6 +41,22 @@ export default defineNuxtConfig({
       login: '/signin',
       callback: '/',
       include: ['/my', '/my/**']
+    }
+  },
+  nitro: {
+    preset: 'cloudflare_module',
+    cloudflare: {
+      deployConfig: true,
+      nodeCompat: true,
+      wrangler: {
+        name: 'infs',
+        observability: {
+          enabled: true,
+          logs: {
+            enabled: true
+          }
+        }
+      }
     }
   }
 })
