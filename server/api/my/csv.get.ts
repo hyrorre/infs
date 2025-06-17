@@ -1,6 +1,4 @@
 import { serverSupabaseClient } from '#supabase/server'
-import { parse } from 'csv-parse/sync'
-import { stringify } from 'csv-stringify/sync'
 
 export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient(event)
@@ -18,7 +16,5 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, message: error?.message ?? 'Internal Server Error' })
   }
 
-  const minified = stringify(parse(data))
-
-  return minified
+  return data
 })
