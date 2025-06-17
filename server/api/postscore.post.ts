@@ -116,7 +116,8 @@ export default defineEventHandler(async (event) => {
     lamp: body.lamp,
     miss: Math.min(Number(body.misscount), 9999),
     ex_score: Number(body.exscore),
-    percent_max: Number(body.exscore) / (chart.note_count * 2)
+    percent_max: Number(body.exscore) / (chart.note_count * 2),
+    updated_at: new Date()
   }
 
   const result = await client.from('chartstats').upsert(chartstat as any)

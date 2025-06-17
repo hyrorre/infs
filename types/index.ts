@@ -38,6 +38,7 @@ export type Chartstat = {
   miss: number
   ex_score: number
   percent_max: number
+  updated_at: string | Date
 }
 
 export type FullChartstat = {
