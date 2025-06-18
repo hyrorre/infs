@@ -84,25 +84,29 @@ export default defineEventHandler(async (event) => {
     lamp: string
   }
   const body: Body = await readBody(event)
-  const client = await serverSupabaseServiceRole(event)
+  const client = serverSupabaseServiceRole(event)
 
   if (!body.apikey) {
     throw createError({ statusCode: 401, message: 'Unauthorized' })
   }
 
-  const { data: user } = (await client.from('apikeys').select('id').eq('apikey', body.apikey).single()) as {
-    data: { id: string }
-  }
+  const { data: user } = await client
+    .from('apikeys')
+    .select('id')
+    .eq('apikey', body.apikey)
+    .limit(1)
+    .single<{ id: string }>()
+
   if (!user) {
     throw createError({ statusCode: 401, message: 'Unauthorized' })
   }
 
-  const { data: chart } = (await client
+  const { data: chart } = await client
     .from('charts')
     .select('note_count')
     .eq('song_id', body.songid)
     .eq('difficulty', body.diff)
-    .single()) as { data: Chart }
+    .single<Chart>()
   if (!chart) {
     throw createError({ statusCode: 404, message: 'Chart Not Found' })
   }
