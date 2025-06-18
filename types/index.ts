@@ -19,6 +19,7 @@ export type Song = {
   artist: string
   bpm: string
   unlock_type: string
+  bpititle: string
 }
 
 export type Chart = {
@@ -26,6 +27,9 @@ export type Chart = {
   difficulty: 'SPB' | 'SPN' | 'SPH' | 'SPA' | 'SPL' | 'DPB' | 'DPN' | 'DPH' | 'DPA' | 'DPL'
   note_count: number
   level: number
+  wr: number
+  avg: number
+  coef: number
 }
 
 export type Chartstat = {
