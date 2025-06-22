@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+const { t } = useI18n()
+const localePath = useLocalePath()
+
 const signOut = () => {
   const supabase = useSupabaseClient()
-  supabase.auth.signOut().then(() => useRouter().push('/'))
+  supabase.auth.signOut().then(() => useRouter().push(localePath('/')))
 }
 
 const id = useRoute().params.id
@@ -17,7 +20,7 @@ const items = computed(
         {
           label: 'INF SCORE TOOL',
           icon: 'i-tabler-infinity',
-          to: '/',
+          to: localePath('/'),
           active: false,
           class: 'site-title'
         }
@@ -26,14 +29,14 @@ const items = computed(
           ? [
               {},
               {
-                label: 'Score',
+                label: t('score'),
                 icon: 'i-tabler-table',
-                to: id ? `/user/${id}` : '/my'
+                to: localePath(id ? `/user/${id}` : '/my')
               },
               {
-                label: 'Stat',
+                label: t('stat'),
                 icon: 'i-tabler-chart-bar',
-                to: id ? `/user/${id}/stat` : '/my/stat'
+                to: localePath(id ? `/user/${id}/stat` : '/my/stat')
               }
             ]
           : ([] as any)
@@ -46,11 +49,11 @@ const items = computed(
               icon: 'i-tabler-user',
               children: [
                 {
-                  label: 'Profile',
-                  to: '/my/profile'
+                  label: t('profile'),
+                  to: localePath('/my/profile')
                 },
                 {
-                  label: 'Sign Out',
+                  label: t('signout'),
                   onSelect: () => signOut()
                 }
               ]
@@ -58,14 +61,14 @@ const items = computed(
           ]
         : [
             {
-              label: 'Sign In',
+              label: t('signin'),
               icon: 'i-tabler-login',
-              to: '/signin'
+              to: localePath('/signin')
             },
             {
-              label: 'Sign Up',
+              label: t('signup'),
               icon: 'i-tabler-user-plus',
-              to: '/signup'
+              to: localePath('/signup')
             }
           ]
     ]

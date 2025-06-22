@@ -59,7 +59,7 @@ const options = {
   <Header :title="'My Score'" />
   <u-container>
     <h1 class="text-2xl font-bold mb-4">MY SCORE DATA</h1>
-    <p v-if="status === 'pending'">Loading score data...</p>
+    <p v-if="status === 'pending'">{{ $t('loading') }}</p>
     <p v-else-if="error">{{ error.message }}</p>
     <p v-else-if="!chartstats?.length">Score is not uploaded.</p>
     <GChart v-else type="BarChart" :data="data" :options="options" />

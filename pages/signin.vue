@@ -6,6 +6,7 @@ useHead({
 })
 
 const supabase = useSupabaseClient()
+const localePath = useLocalePath()
 
 const form = reactive({
   email: '',
@@ -18,7 +19,7 @@ const submit = async (e: FormSubmitEvent<typeof form>) => {
     if (error) {
       error_message.value = error.message
     } else {
-      useRouter().push('/my')
+      useRouter().push(localePath('/my'))
     }
   })
 }
@@ -38,8 +39,8 @@ const submit = async (e: FormSubmitEvent<typeof form>) => {
           </u-form-field>
           <p>{{ error_message }}</p>
           <div class="flex justify-between items-end">
-            <u-link to="/forgot" class="text-left">Forgot your password?</u-link>
-            <u-button type="submit" size="lg" class="mt-8">SIGN IN</u-button>
+            <u-link :to="$localePath('/forgot')" class="text-left">{{ $t('forgot_password') }}</u-link>
+            <u-button type="submit" size="lg" class="mt-8">{{ $t('signin') }}</u-button>
           </div>
         </u-form>
       </u-card>

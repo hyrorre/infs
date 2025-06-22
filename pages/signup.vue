@@ -41,18 +41,18 @@ const submit = async (e: FormSubmitEvent<typeof form>) => {
           </u-form-field>
           <p>{{ error_message }}</p>
           <div class="flex justify-end items-end">
-            <u-button type="submit" size="lg" class="mt-8">SIGN UP</u-button>
+            <u-button type="submit" size="lg" class="mt-8">{{ $t('signup') }}</u-button>
           </div>
         </u-form>
       </u-card>
     </div>
     <u-modal v-model:open="open" :close="false">
       <template #header>
-        <h2 class="text-xl">Sign up completed.</h2>
+        <h2 class="text-xl">{{ $t('signup_complete') }}</h2>
       </template>
       <template #body>
-        <p>Check your email box.</p>
-        <u-button to="/" class="mt-4">Close</u-button>
+        <p>{{ $t('check_your_email') }}</p>
+        <u-button :to="$localePath('/')" class="mt-4">{{ $t('close') }}</u-button>
       </template>
     </u-modal>
   </u-container>

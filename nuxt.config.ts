@@ -6,34 +6,15 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['types/**']
   },
-  modules: ['@nuxt/content', '@nuxt/eslint', '@nuxtjs/supabase', '@nuxt/ui'],
-  app: {
-    head: {
-      title: 'INF SCORE TOOL',
-      titleTemplate: '%s - INF SCORE TOOL',
-      htmlAttrs: {
-        lang: 'en'
-      },
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }
-      ],
-      meta: [
-        { name: 'description', content: 'beatmania IIDX INFINITAS SCORE TOOL' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { property: 'og:title', content: 'INF SCORE TOOL' },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: 'https://infs.iidx.wiki' },
-        { property: 'og:image', content: '/icon.png' },
-        { property: 'og:site_name', content: 'INF SCORE TOOL' },
-        { property: 'og:description', content: 'beatmania IIDX INFINITAS SCORE TOOL' },
-        { property: 'og:locale', content: 'en_US' },
-        { name: 'twitter:card', content: 'summary' },
-        { name: 'twitter:site', content: '@hyrorre' },
-        { name: 'twitter:title', content: 'INF SCORE TOOL' },
-        { name: 'twitter:description', content: 'beatmania IIDX INFINITAS SCORE TOOL' }
-      ]
+  modules: ['@nuxt/content', '@nuxt/eslint', '@nuxtjs/supabase', '@nuxt/ui', '@nuxtjs/i18n'],
+  i18n: {
+    locales: [
+      { code: 'ja', name: '日本語', file: 'ja.json' },
+      { code: 'en', name: 'English', file: 'en.json' }
+    ],
+    defaultLocale: 'ja',
+    bundle: {
+      optimizeTranslationDirective: false
     }
   },
   supabase: {
