@@ -91,13 +91,13 @@ export default defineEventHandler(async (event) => {
   }
 
   const { data: user } = await client
-    .from('apikeys')
+    .from('api_keys')
     .select('id')
-    .eq('apikey', body.apikey)
+    .eq('api_key', body.apikey)
     .limit(1)
     .single<{ id: string }>()
 
-  if (!user) {
+  if (!user?.id) {
     throw createError({ statusCode: 401, message: 'Unauthorized' })
   }
 
