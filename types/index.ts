@@ -8,7 +8,7 @@ export type Profile = {
 
 export type ApiKey = {
   id: string
-  apikey: string
+  api_key: string
 }
 
 export type Song = {

@@ -3,10 +3,10 @@ const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
 const { data: form } = useAsyncData<ApiKey>(async () => {
-  const { data, error } = await supabase.from('apikeys').select('*').single<ApiKey>()
+  const { data, error } = await supabase.from('api_keys').select('*').single<ApiKey>()
   if (error) {
     const { data, error: error2 } = await supabase
-      .from('apikeys')
+      .from('api_keys')
       .insert({ id: user.value?.id } as any)
       .select()
       .single<ApiKey>()
@@ -26,15 +26,15 @@ const input_type = ref('password')
 const copy = () => {
   input_type.value = 'text'
   if (form.value) {
-    navigator.clipboard.writeText(form.value.apikey)
+    navigator.clipboard.writeText(form.value.api_key)
     message.value = 'Copied to clipboard.'
   }
 }
 
 const submit = () => {
-  form.value!.apikey = crypto.randomUUID()
+  form.value!.api_key = crypto.randomUUID()
   supabase
-    .from('apikeys')
+    .from('api_keys')
     .upsert(form.value as any)
     .then(async ({ error }) => {
       if (error) {
@@ -54,8 +54,8 @@ const submit = () => {
     </template>
     <div v-if="!form">loading...</div>
     <u-form v-else :state="form">
-      <u-form-field label="API KEY" name="apikey" class="mt-4">
-        <u-input v-model="form.apikey" class="w-full" size="lg" :type="input_type" disabled />
+      <u-form-field label="API KEY" name="api_key" class="mt-4">
+        <u-input v-model="form.api_key" class="w-full" size="lg" :type="input_type" disabled />
       </u-form-field>
       <div class="mt-4 flex justify-end items-center">
         <div class="mr-4">{{ message }}</div>
@@ -67,8 +67,8 @@ const submit = () => {
             <u-form v-else :state="form" @submit="submit">
               The API key you have been using will be invalidated.<br />Would you like to issue a new API key?
               <!-- 今まで使用していたAPIキーは無効になります。<br />新しいAPIキーを発行しますか？ -->
-              <u-form-field name="apikey" class="invisible">
-                <u-input v-model="form.apikey" required class="w-full" size="lg" />
+              <u-form-field name="api_key" class="invisible">
+                <u-input v-model="form.api_key" required class="w-full" size="lg" />
               </u-form-field>
               <div class="flex justify-end items-center">
                 <u-button type="submit" @click="submit">Regenerate</u-button>
