@@ -28,7 +28,7 @@ const submit = async (e: FormSubmitEvent<typeof form>) => {
           </u-form-field>
           <p>{{ error_message }}</p>
           <div class="flex justify-end items-end">
-            <u-button type="submit" size="lg" class="mt-8">SUBMIT</u-button>
+            <u-button type="submit" size="lg" class="mt-8">{{ $t('submit') }}</u-button>
           </div>
         </u-form>
       </u-card>

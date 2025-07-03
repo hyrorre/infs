@@ -30,21 +30,20 @@ const submit = () => {
 <template>
   <u-card>
     <template #header>
-      <h3>Delete Account</h3>
+      <h3>{{ $t('delete_account') }}</h3>
     </template>
-    <div>Once your account is deleted, all of its resources and data will be permanently deleted.</div>
+    <div>{{ $t('delete_account_description') }}</div>
     <u-modal>
-      <u-button color="error" class="mt-4">Delete Account</u-button>
+      <u-button color="error" class="mt-4">{{ $t('delete_account') }}</u-button>
       <template #body>
         <u-form :state="form" @submit="submit">
-          Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will
-          be permanently deleted. Please enter "Delete" to confirm you would like to permanently delete your account.
+          {{ $t('delete_account_confirm') }}
           <u-form-field name="del" class="mt-4">
             <u-input v-model="form.del" required class="w-full" size="lg" />
           </u-form-field>
           <div class="mt-4 flex justify-end items-center">
             <div class="mr-4">{{ message }}</div>
-            <u-button color="error" type="submit">DELETE ACCOUNT</u-button>
+            <u-button color="error" type="submit">{{ $t('delete_account') }}</u-button>
           </div>
         </u-form>
       </template>

@@ -17,16 +17,16 @@ const submit = async () => {
 <template>
   <u-card>
     <template #header>
-      <h3>Email</h3>
+      <h3>{{ $t('email') }}</h3>
     </template>
-    <div v-if="!user?.email">loading...</div>
+    <div v-if="!user?.email">{{ $t('loading') }}</div>
     <u-form v-else :state="user" @submit="submit">
-      <u-form-field label="Email" name="email">
+      <u-form-field :label="$t('email')" name="email">
         <u-input v-model="user.email" required autofocus class="w-full" size="lg" />
       </u-form-field>
       <div class="mt-4 flex justify-end items-center">
         <div class="mr-4">{{ message }}</div>
-        <u-button type="submit">Save</u-button>
+        <u-button type="submit">{{ $t('save') }}</u-button>
       </div>
     </u-form>
   </u-card>

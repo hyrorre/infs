@@ -37,9 +37,9 @@ const submit = () => {
 <template>
   <u-card>
     <template #header>
-      <h3>Profile</h3>
+      <h3>{{ $t('profile') }}</h3>
     </template>
-    <div v-if="status === 'pending'">loading...</div>
+    <div v-if="status === 'pending'">{{ $t('loading') }}</div>
     <div v-else-if="error">{{ error.message }}</div>
     <u-form v-else-if="form" :state="form" @submit="submit">
       <u-form-field label="ID" name="name">
@@ -54,18 +54,18 @@ const submit = () => {
       <URadioGroup
         v-model="form.scope"
         :items="[
-          { label: 'Public', value: 'public' },
-          { label: 'Private', value: 'private' }
+          { label: $t('public'), value: 'public' },
+          { label: $t('private'), value: 'private' }
         ]"
         orientation="horizontal"
         class="mt-4"
       />
       <p class="mt-1 text-gray-500">
-        {{ form.scope === 'public' ? 'Everyone can see your scores.' : 'Only you can see your scores.' }}
+        {{ $t(form.scope + '_description') }}
       </p>
       <div class="mt-4 flex justify-end items-center">
         <div class="mr-4">{{ message }}</div>
-        <u-button type="submit">Save</u-button>
+        <u-button type="submit">{{ $t('save') }}</u-button>
       </div>
     </u-form>
   </u-card>

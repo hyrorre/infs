@@ -50,28 +50,27 @@ const submit = () => {
 <template>
   <u-card>
     <template #header>
-      <h3>Api Key</h3>
+      <h3>API KEY</h3>
     </template>
-    <div v-if="!form">loading...</div>
+    <div v-if="!form">{{ $t('loading') }}</div>
     <u-form v-else :state="form">
       <u-form-field label="API KEY" name="api_key" class="mt-4">
         <u-input v-model="form.api_key" class="w-full" size="lg" :type="input_type" disabled />
       </u-form-field>
       <div class="mt-4 flex justify-end items-center">
         <div class="mr-4">{{ message }}</div>
-        <u-button type="submit" variant="outline" class="mr-2" @click="copy">Copy</u-button>
+        <u-button type="submit" variant="outline" class="mr-2" @click="copy">{{ $t('copy') }}</u-button>
         <u-modal v-model:open="open">
-          <u-button type="submit" variant="outline">Regenerate</u-button>
+          <u-button type="submit" variant="outline">{{ $t('regenerate') }}</u-button>
           <template #body>
-            <div v-if="!form">loading...</div>
+            <div v-if="!form">{{ $t('loading') }}</div>
             <u-form v-else :state="form" @submit="submit">
-              The API key you have been using will be invalidated.<br />Would you like to issue a new API key?
-              <!-- 今まで使用していたAPIキーは無効になります。<br />新しいAPIキーを発行しますか？ -->
+              <span class="whitespace-pre-wrap">{{ $t('regenerate_confirm') }}</span>
               <u-form-field name="api_key" class="invisible">
                 <u-input v-model="form.api_key" required class="w-full" size="lg" />
               </u-form-field>
               <div class="flex justify-end items-center">
-                <u-button type="submit" @click="submit">Regenerate</u-button>
+                <u-button type="submit" @click="submit">{{ $t('regenerate') }}</u-button>
               </div>
             </u-form>
           </template>

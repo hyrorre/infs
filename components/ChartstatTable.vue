@@ -8,10 +8,12 @@ const { filter, sort, reverse, chartstats } = defineProps<{
 
 import type { TableColumn } from '@nuxt/ui'
 
+const { t } = useI18n()
+
 const columns: TableColumn<FullChartstat>[] = [
   {
     accessorKey: 'songs.title',
-    header: 'TITLE',
+    header: t('title'),
     cell: ({ row }) =>
       row.original.songs.title.replace(
         / *(-[^-]+-|\(.+\)|~.+~|～.+～|feat\..+|ft\..+|With Money.*|そしてお米を.*|-JAKA.*)$/,
@@ -20,27 +22,27 @@ const columns: TableColumn<FullChartstat>[] = [
   },
   {
     accessorKey: 'difficulty',
-    header: 'DIFF'
+    header: t('diff')
   },
   {
     accessorKey: 'charts.level',
-    header: 'LEVEL'
+    header: t('level')
   },
   {
     accessorKey: 'lamp',
-    header: 'LAMP'
+    header: t('lamp')
   },
   {
     accessorKey: 'grade',
-    header: 'GRADE'
+    header: t('grade')
   },
   {
     accessorKey: 'ex_score',
-    header: 'SCORE'
+    header: t('exscore')
   },
   {
     accessorKey: 'miss',
-    header: 'MISS',
+    header: t('miss'),
     cell: ({ row }) => (row.getValue('miss') === 9999 ? '-' : row.getValue('miss'))
   }
 ]
@@ -92,7 +94,7 @@ const page = ref(1)
 <template>
   <section>
     <div class="flex justify-between items-center">
-      <div v-if="chartstats">Count : {{ filteredChartstats.length }}</div>
+      <div v-if="chartstats">{{ $t('count') }} : {{ filteredChartstats.length }}</div>
       <div>
         <u-button
           v-if="$route.params.id || profile?.scope === 'public'"
@@ -103,9 +105,11 @@ const page = ref(1)
           class="mr-2"
           icon="i-tabler-brand-x"
         >
-          Share
+          {{ $t('share') }}
         </u-button>
-        <u-button variant="outline" color="neutral" icon="i-tabler-refresh" @click="$emit('refresh')">Reload</u-button>
+        <u-button variant="outline" color="neutral" icon="i-tabler-refresh" @click="$emit('refresh')">
+          {{ $t('reload') }}
+        </u-button>
       </div>
     </div>
     <u-table :data="filteredChartstats.slice(filter.limit * (page - 1), filter.limit * page)" :columns="columns" />
