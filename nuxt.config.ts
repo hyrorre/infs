@@ -36,6 +36,12 @@ export default defineNuxtConfig({
       ]
     }
   },
+  content: {
+    database: {
+      type: 'd1',
+      bindingName: 'd1'
+    }
+  },
   supabase: {
     redirectOptions: {
       login: '/signin',
