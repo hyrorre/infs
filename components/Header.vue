@@ -29,7 +29,7 @@ const items = computed(
           ? [
               {},
               {
-                label: t('score'),
+                label: t('list'),
                 icon: 'i-tabler-table',
                 to: localePath(id ? `/user/${id}` : '/my')
               },
