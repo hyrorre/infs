@@ -26,6 +26,7 @@
   "private": "非公開",
   "public_description": "すべてのユーザーがあなたのスコアを確認できます",
   "private_description": "他のユーザーはあなたのスコアを確認できません",
+  "null_description": "",
   "save": "保存",
   "copy": "コピー",
   "regenerate": "再生成",

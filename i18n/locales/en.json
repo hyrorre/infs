@@ -26,6 +26,7 @@
   "private": "Private",
   "public_description": "Everyone can see your scores.",
   "private_description": "Only you can see your scores.",
+  "null_description": "",
   "save": "Save",
   "copy": "Copy",
   "regenerate": "Regenerate",
